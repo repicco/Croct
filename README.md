@@ -1,15 +1,16 @@
 # Croct
 
-### Projeto Croct-UploadFile
+# Projeto Croct-UploadFile
 
 Criado utilizando React + StyledComponents (node-sass)
 
-[npm i styled-components node-sass]
+# npm i styled-components node-sass
 
-Iniciar ambiente:
+Iniciar ambiente (Após clonar o repositorio):
 
-[npm install] (Após clonar o repositorio)
-[npm start]
+# [ npm install ]
+
+# npm start
 
 Funcionalidades:
 
@@ -21,7 +22,7 @@ Salvar a imagem com a configuração e exibir na tela inicial de carga.
 
 Iniciar Testes:
 
-[npm test:e2e]
+# npm test:e2e
 
 Testes:
 Validar acesso com imagem superior a 50kb, validar com arquivo pdf, alterar a borda e verificar saida final.
