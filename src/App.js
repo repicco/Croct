@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider } from 'styled-components'
 
-import FileUpload from "./components/FileUpload";
+import AvatarUpload from "./components/AvatarUpload";
 
 const colors = {
   back: '#F2F5F8',
@@ -17,7 +17,7 @@ function App() {
   return (
     <ThemeProvider theme={colors}>
       <form >
-        <FileUpload />
+        <AvatarUpload />
       </form>
     </ThemeProvider>
   );

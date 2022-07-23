@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 import iconImg from '../../assets/iconImg.png'
 
-import FilePreview from "../FilePreview";
-import {FileContainer, FileTextContainer, FileTitle} from './style'
-import {PreviewImg} from '../FilePreview/style'
+import AvatarPreview from "../AvatarPreview";
+import {UploadContainer, UploadTextContainer, UploadTitle} from './style'
+import {PreviewImg} from '../AvatarPreview/style'
 
 export default function FileUpload(){
   const maxFileSizeInBytes = 500000;
@@ -67,7 +67,7 @@ export default function FileUpload(){
 
   if(step === 'preview'){
     return (
-      <FilePreview 
+      <AvatarPreview 
         files={files} 
         fileRemove={handleFile.remove} 
         error={error}  
@@ -77,25 +77,25 @@ export default function FileUpload(){
   }
 
   return (
-    <FileContainer>
+    <UploadContainer>
         {
           Object.keys(savedFile).map(
               (key) => <PreviewImg borderRadius={`${range}%`} src={URL.createObjectURL(savedFile[key])} alt="image" key={key} />
           )
         }
-        <FileTextContainer>
-          <FileTitle>
+        <UploadTextContainer>
+          <UploadTitle>
             <img src={iconImg} alt="img" />
             <h1>Organization Logo</h1>
-          </FileTitle>
+          </UploadTitle>
           <p>Drop the image here or click to browse.</p>
-        </FileTextContainer>
+        </UploadTextContainer>
         <input
           type="file"
           onChange={handleFile.update}
           title=""
           value=""
         />
-      </FileContainer>
+      </UploadContainer>
   );
 }

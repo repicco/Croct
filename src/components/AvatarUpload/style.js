@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const FileContainer = styled.section`
+export const UploadContainer = styled.section`
     background: ${({ theme }) => theme.back};
     max-width: 553px;
     height: 177px;
@@ -35,7 +35,7 @@ export const FileContainer = styled.section`
     }
 `
 
-export const FileTextContainer = styled.div`
+export const UploadTextContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,7 +43,7 @@ export const FileTextContainer = styled.div`
     width: 100%;
 `
 
-export const FileTitle = styled.div`
+export const UploadTitle = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 8px;
