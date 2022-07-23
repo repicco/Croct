@@ -1,4 +1,4 @@
-# Projeto Croct-UploadFile
+# Projeto Croct-Avatar
 
 Criado utilizando React + StyledComponents (node-sass)
 
