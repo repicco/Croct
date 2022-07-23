@@ -9,13 +9,14 @@ const colors = {
   warn: '#C64D32',
   title: '#495567',
   text: '#677489',
-  link: '#3D485F'
+  link: '#3D485F',
+  border: '#C7CDD3'
 };
 
 function App() {
   return (
     <ThemeProvider theme={colors}>
-      <form>
+      <form >
         <FileUpload />
       </form>
     </ThemeProvider>

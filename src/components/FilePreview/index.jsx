@@ -5,7 +5,7 @@ import iconClose from '../../assets/iconClose.png'
 
 import {PreviewContainer, PreviewImgArea, PreviewImg, PreviewText, PreviewBtn} from './style'
 
-export default function FilePreview({files, fileRemove, error, clearError}){
+export default function FilePreview({files, functions, error, clearError}){
     const [range, setRange] = useState(4)
 
     if(!error?.show){
@@ -13,17 +13,17 @@ export default function FilePreview({files, fileRemove, error, clearError}){
             <PreviewContainer>
                 {
                     Object.keys(files).map(
-                        (key) => <PreviewImg borderRadius={`${range}%`} src={URL.createObjectURL(files[key])} alt="image" />
+                        (key) => <PreviewImg borderRadius={`${range}%`} src={URL.createObjectURL(files[key])} alt="image" key={key} />
                     )
                 }
                 <PreviewText>
                     <h1>Crop</h1>
                     <input type="range" value={range} onChange={(ev) => setRange(ev.target.value)} min={4} max={50}/>
                     <PreviewBtn>
-                        <button>Save</button>
+                        <button type="button" onClick={() => functions.saveFile(range)}>Save</button>
                     </PreviewBtn>
                 </PreviewText>
-                <span onClick={clearError}>
+                <span onClick={functions.clearError}>
                     <img src={iconClose} alt="close" />
                 </span>
             </PreviewContainer>
@@ -37,9 +37,9 @@ export default function FilePreview({files, fileRemove, error, clearError}){
                 <PreviewText h1Color={'warn'}>
                     <h1>Sorry, the upload failed</h1>
                     <h2>{error.message}</h2>
-                    <p onClick={clearError}>Try again</p>
+                    <p onClick={functions.clearError}>Try again</p>
                 </PreviewText>
-                <span onClick={clearError}>
+                <span onClick={functions.clearError}>
                     <img src={iconClose} alt="close" />
                 </span>
             </PreviewContainer>

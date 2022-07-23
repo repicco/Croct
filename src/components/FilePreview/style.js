@@ -3,12 +3,14 @@ import styled from 'styled-components'
 export const PreviewContainer = styled.section`
     background: ${({ theme }) => theme.back};
     max-width: 553px;
-    max-height: 177px;
+    height: 177px;
     border-radius: 8px;
     padding: 32px;
     position: relative;
     display: flex;
     align-items: center;
+    border: 2px solid transparent;
+    margin: 25px;
     span {
         position: absolute;
         top: 32px;
