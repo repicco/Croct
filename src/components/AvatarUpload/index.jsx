@@ -6,10 +6,10 @@ import AvatarPreview from "../AvatarPreview";
 import {UploadContainer, UploadTextContainer, UploadTitle} from './style'
 import {PreviewImg} from '../AvatarPreview/style'
 
-export default function FileUpload(){
+export default function AvatarUpload(){
   const maxFileSizeInBytes = 500000;
 
-  const [files, setFiles] = useState({});
+  const [file, setFile] = useState({});
   const [savedFile, setSavedFile] = useState({})
   const [range, setRange] = useState(4)
   const [step, setStep] = useState('upload')
@@ -21,81 +21,76 @@ export default function FileUpload(){
       setStep('upload')
     },
     saveFile(range){
-      setSavedFile(files)
+      setSavedFile(file)
       setRange(range)
-      setFiles({})
+      setFile({})
       setStep('upload')
     }
   }
 
   const handleFile = {
-    validate(newFiles){
-      for (let file of newFiles) {
-        if(["image/png", "image/jpeg", "image/svg+xml"].includes(file.type)){
-          if(file.size <= maxFileSizeInBytes){
-            return { file };
-          } else {
-            setError({
-              show: true,
-              message: 'Oops... too big file!'
-            })
-          }
-        } else {
-          setError({
-            show: true,
-            message: 'Oops... the file is not png, svg or jpg'
-          })
-        }      
+    validate(files){
+      const file = files[0]
+
+      if(!["image/png", "image/jpeg", "image/svg+xml"].includes(file.type)) {
+        setError({
+          show: true,
+          message: 'Oops... the file is not png, svg or jpg'
+        })
       }
-      return { ...files };
+
+      if(file.size > maxFileSizeInBytes){
+        setError({
+          show: true,
+          message: 'Oops... too big file!'
+        })
+      }
+
+      if(!error.show){
+        setFile(file);
+        setSavedFile({})
+      }
     },
     update(e){
-      const { files: newFiles } = e.target;
-      if (newFiles.length) {
-        let updatedFiles = handleFile.validate(newFiles);
-        console.log(updatedFiles)
-        setFiles(updatedFiles);
-        setSavedFile({})
+      const { files } = e.target;
+      if (files.length) {
+        handleFile.validate(files);
       }
       setStep('preview')
     },
-    remove(fileName){
-      delete files[fileName];
-      setFiles({ ...files });
-    }
   }
 
-  if(step === 'preview'){
+  if(step === 'upload'){
     return (
-      <AvatarPreview 
-        files={files} 
-        fileRemove={handleFile.remove} 
-        error={error}  
-        functions={handlePreview}
-      /> 
-    )
+      <UploadContainer >
+          {
+            savedFile.name && (
+              <PreviewImg name={`${savedFile.name}`} borderRadius={`${range}%`} src={URL.createObjectURL(savedFile)} alt="image" key={savedFile.name} data-cy={'resultFile'} />
+            )
+          }
+          <UploadTextContainer>
+            <UploadTitle>
+              <img src={iconImg} alt="img" />
+              <h1>Organization Logo</h1>
+            </UploadTitle>
+            <p>Drop the image here or click to browse.</p>
+          </UploadTextContainer>
+          <input
+            type="file"
+            data-cy={'uploadFile'}
+            onChange={handleFile.update}
+            title=""
+            value=""
+          />
+        </UploadContainer>
+    );
   }
 
   return (
-    <UploadContainer>
-        {
-          Object.keys(savedFile).map(
-              (key) => <PreviewImg borderRadius={`${range}%`} src={URL.createObjectURL(savedFile[key])} alt="image" key={key} />
-          )
-        }
-        <UploadTextContainer>
-          <UploadTitle>
-            <img src={iconImg} alt="img" />
-            <h1>Organization Logo</h1>
-          </UploadTitle>
-          <p>Drop the image here or click to browse.</p>
-        </UploadTextContainer>
-        <input
-          type="file"
-          onChange={handleFile.update}
-          title=""
-          value=""
-        />
-      </UploadContainer>
-  );
+    <AvatarPreview 
+      file={file} 
+      error={error}  
+      functions={handlePreview}
+    /> 
+  )
 }

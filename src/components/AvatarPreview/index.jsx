@@ -5,16 +5,16 @@ import iconClose from '../../assets/iconClose.png'
 
 import {PreviewContainer, PreviewImgArea, PreviewImg, PreviewText, PreviewBtn} from './style'
 
-export default function FilePreview({files, functions, error, clearError}){
+export default function AvatarPreview({file, functions, error}){
     const [range, setRange] = useState(4)
 
     if(!error?.show){
         return (
             <PreviewContainer>
                 {
-                    Object.keys(files).map(
-                        (key) => <PreviewImg borderRadius={`${range}%`} src={URL.createObjectURL(files[key])} alt="image" key={key} />
-                    )
+                    file && (
+                        <PreviewImg name={`${file.name}`} borderRadius={`${range}%`} src={URL.createObjectURL(file)} alt="image" key={file.name} data-cy={'resultFile'} />
+                      )
                 }
                 <PreviewText>
                     <h1>Crop</h1>

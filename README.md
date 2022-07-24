@@ -1,28 +1,37 @@
 # Projeto Croct-Avatar
 
-Criado utilizando React + StyledComponents (node-sass)
+[Link Netlify](https://croct.netlify.app/)
 
-`yarn add styled-components node-sass`
+Create with:
 
-Iniciar ambiente (Após clonar o repositorio):
+- React
+- StyledComponents
+- Node-sass
+- Cypress
+- Eslint-plugin
+- Eslint-plugin-cypress
+- Cypress-file-upload
+
+Start project (after clone repository):
 
 ```
 yarn install
 yarn start
-
 ```
 
-Funcionalidades:
+Functions:
 
-- Carregar imagens(jpg, png e svg) de até 50kb e alertar caso incorreto.
+- Load image (jpg, png and svg) until 50kb and alert if invalid file.
 
-- Permitir a edição da borda da imagem através de um Input Range.
+- Allow image border editing via an Input Range
 
-- Salvar a imagem com a configuração, exibir na tela inicial de carga e permitir carregar uma nova
+- Save the image with the configuration, display it on the home screen and allow loading a new one
 
-Iniciar Testes:
+Start Tests (Cypress):
 
-`yarn test:e2e`
+```
+yarn test:component
+yarn test:e2e
+```
 
-Testes:
-Validar acesso com imagem superior a 50kb, validar com arquivo pdf, alterar a borda e verificar saida final.
+To use e2e it is necessary to start the application before.
