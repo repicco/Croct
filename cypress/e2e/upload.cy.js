@@ -14,18 +14,14 @@ describe('UploadFile', () => {
 
     it('error: not image file', () => {
         cy.get('[data-cy=uploadFile]').attachFile(files.notImage.doc)
-        cy.wait(100)
         cy.contains(files.notImage.error)
         cy.contains('Try again').click()
-        cy.wait(100)
     })
 
     it('error: too large file', () => {
         cy.get('[data-cy=uploadFile]').attachFile(files.tooLarge.doc)
-        cy.wait(100)
         cy.contains(files.tooLarge.error)
         cy.get('span > img').click()
-        cy.wait(100)
     })
 
     it('happy: change valid image', () => {
@@ -34,7 +30,6 @@ describe('UploadFile', () => {
         cy.get('[data-cy=resultFile]').invoke('attr', 'style', `border-radius: ${rangeValue}%`).should('have.attr', 'style', `border-radius: ${rangeValue}%`)
         cy.get('[data-cy=resultFile]').should('have.attr', 'name', files.ok)
         cy.contains('Save').click()
-        cy.wait(100)
         cy.get('[data-cy=resultFile]').invoke('attr', 'style', `border-radius: ${rangeValue}%`).should('have.attr', 'style', `border-radius: ${rangeValue}%`)
         cy.get('[data-cy=resultFile]').should('have.attr', 'name', files.ok)
     })
