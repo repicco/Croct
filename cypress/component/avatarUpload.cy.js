@@ -5,7 +5,7 @@ const files = {
   tooLarge: { doc: 'imgLarge.jpg', error: 'Oops... too big file!' },
   ok: "imgSmall.png",
 }
-const rangeValue = 50
+const rangeValue = 20
 
 describe('AvatarUpload', () => {
   beforeEach(() => {
@@ -13,24 +13,37 @@ describe('AvatarUpload', () => {
   })
 
   it('error: too large file', () => {
-    cy.get('[data-cy=uploadFile]').attachFile(files.tooLarge.doc)
+    cy.get('[data-cy=uploadFile]')
+      .attachFile(files.tooLarge.doc)
+
     cy.contains(files.tooLarge.error)
     cy.get('span > img').click()
   })
 
   it('error: not image file', () => {
-    cy.get('[data-cy=uploadFile]').attachFile(files.notImage.doc)
+    cy.get('[data-cy=uploadFile]')
+      .attachFile(files.notImage.doc)
+
     cy.contains(files.notImage.error)
     cy.contains('Try again').click()
   })
 
   it('happy: change valid image', () => {
-    cy.get('[data-cy=uploadFile]').attachFile(files.ok)
-    cy.get('input').invoke('val', rangeValue).should('have.value', rangeValue).trigger('change')
-    cy.get('[data-cy=resultFile]').invoke('attr', 'style', `border-radius: ${rangeValue}%`).should('have.attr', 'style', `border-radius: ${rangeValue}%`)
-    cy.get('[data-cy=resultFile]').should('have.attr', 'name', files.ok)
+    cy.get('[data-cy=uploadFile]')
+      .attachFile(files.ok)
+
+    cy.get('input')
+      .invoke('val', rangeValue)
+      .should('have.value', rangeValue)
+      .trigger('change')
+
+    cy.get(`[data-cy=${files.ok.replace('.', '_')}]`)
+      .invoke('attr', 'style', `border-radius: ${rangeValue}%`)
+      .should('have.attr', 'style', `border-radius: ${rangeValue}%`)
+
     cy.contains('Save').click()
-    cy.get('[data-cy=resultFile]').invoke('attr', 'style', `border-radius: ${rangeValue}%`).should('have.attr', 'style', `border-radius: ${rangeValue}%`)
-    cy.get('[data-cy=resultFile]').should('have.attr', 'name', files.ok)
+    cy.get(`[data-cy=${files.ok.replace('.', '_')}]`)
+      .invoke('attr', 'style', `border-radius: ${rangeValue}%`)
+      .should('have.attr', 'style', `border-radius: ${rangeValue}%`)
   })
 })

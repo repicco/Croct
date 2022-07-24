@@ -13,7 +13,7 @@ export default function AvatarPreview({file, functions, error}){
             <PreviewContainer>
                 {
                     file && (
-                        <PreviewImg name={`${file.name}`} borderRadius={`${range}%`} src={URL.createObjectURL(file)} alt="image" key={file.name} data-cy={'resultFile'} />
+                        <PreviewImg borderRadius={range} src={URL.createObjectURL(file)} alt="image" data-cy={file.name.replace('.', '_')} />
                       )
                 }
                 <PreviewText>
@@ -31,7 +31,7 @@ export default function AvatarPreview({file, functions, error}){
     } else {
         return (
             <PreviewContainer>
-                <PreviewImgArea borderRadius={'50%'}>
+                <PreviewImgArea>
                     <img src={iconWarning} alt="warning"  />
                 </PreviewImgArea>
                 <PreviewText h1Color={'warn'}>

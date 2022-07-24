@@ -65,7 +65,7 @@ export default function AvatarUpload(){
       <UploadContainer >
           {
             savedFile.name && (
-              <PreviewImg name={`${savedFile.name}`} borderRadius={`${range}%`} src={URL.createObjectURL(savedFile)} alt="image" key={savedFile.name} data-cy={'resultFile'} />
+              <PreviewImg borderRadius={range} src={URL.createObjectURL(savedFile)} alt="image" data-cy={savedFile.name.replace('.', '_')} />
             )
           }
           <UploadTextContainer>

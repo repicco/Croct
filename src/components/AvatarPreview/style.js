@@ -27,11 +27,10 @@ export const PreviewImgArea = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: ${({ borderRadius }) => borderRadius};
+    border-radius: 50%;
     img {
     max-width: 100%;
     max-height: 100%;
-    border-radius: ${({ borderRadius }) => borderRadius};
     }
 `
 
@@ -39,7 +38,7 @@ export const PreviewImg = styled.img`
     width: 113px;
     height: 113px;
     background: ${({ theme }) => theme.high};
-    border-radius: ${({ borderRadius }) => borderRadius};
+    border-radius: ${({ borderRadius }) => `${borderRadius}%`};
 `
 
 export const PreviewText = styled.div`
